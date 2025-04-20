@@ -84,3 +84,74 @@ Make sure to create a `.env` file in the root of your project with the following
 ```env
 MONGO_URI=mongodb://localhost:27017/tasky
 JWT_SECRET=your_jwt_secret_key
+```
+
+---
+
+## 📁 Project Stucture
+```
+src/
+└── main/
+    ├── kotlin/
+    │   └── com/
+    │       └── khcodings/
+    │           └── tasky/
+    │               ├── TaskyApplication.kt
+    │
+    │               ├── application/
+    │               │   ├── auth/
+    │               │   │   ├── dto/
+    │               │   │   │   ├── AuthRequest.kt
+    │               │   │   │   ├── RefreshRequest.kt
+    │               │   │   │   └── TokenPair.kt
+    │               │   │   └── AuthService.kt
+    │               │   └── tasks/
+    │               │       ├── dto/
+    │               │       │   ├── TaskMapper.kt
+    │               │       │   ├── TaskRequest.kt
+    │               │       │   └── TaskResponse.kt
+    │               │       └── TaskService.kt
+    │
+    │               ├── domain/
+    │               │   ├── task/
+    │               │   │   ├── Task.kt
+    │               │   │   └── TaskRepository.kt
+    │               │   └── user/
+    │               │       ├── User.kt
+    │               │       └── UserRepository.kt
+    │
+    │               ├── infrastructure/
+    │               │   ├── config/
+    │               │   │   └── SecurityConfig.kt
+    │               │   ├── persistence/
+    │               │   │   └── refresh/
+    │               │   │       ├── RefreshToken.kt
+    │               │   │       └── RefreshTokenRepository.kt
+    │               │   └── security/
+    │               │       ├── CustomAuthEntryPoint.kt
+    │               │       ├── HashEncoder.kt
+    │               │       ├── JwtAuthFilter.kt
+    │               │       └── JwtService.kt
+    │
+    │               ├── shared/
+    │               │   ├── interfaces/
+    │               │   │   └── ValidationGroups.kt
+    │               │   └── response/
+    │               │       ├── ActionResponse.kt
+    │               │       ├── ApiResponse.kt
+    │               │       ├── ErrorResponse.kt
+    │               │       └── SuccessResponse.kt
+    │
+    │               └── web/
+    │                   ├── advice/
+    │                   │   └── exceptions/
+    │                   │       ├── AuthException.kt
+    │                   │       └── GlobalExceptionHandler.kt
+    │                   ├── auth/
+    │                   │   └── AuthController.kt
+    │                   └── task/
+    │                       └── TasksController.kt
+
+```
+---
+
