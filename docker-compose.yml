@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  tasky-app:
+    build:
+      context: .
+    container_name: tasky-app
+    ports:
+      - 8085:8085
+    environment:
+      - MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}
+      - SECRET_KEY=${SECRET_KEY}
+      - LOG_SERVICE_BASE_URL=http://log-service:9090
+    depends_on:
+      - log-service
+  log-service:
+    build:
+      context: ./log-service
+    container_name: log-service
+    ports:
+      - "9090:9090"
