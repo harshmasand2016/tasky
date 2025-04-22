@@ -9,6 +9,7 @@ import com.khcodings.tasky.infrastructure.persistence.refresh.RefreshTokenReposi
 import com.khcodings.tasky.domain.user.UserRepository
 import com.khcodings.tasky.infrastructure.security.HashEncoder
 import com.khcodings.tasky.infrastructure.security.JwtService
+import com.khcodings.tasky.utils.LogClient
 import org.bson.types.ObjectId
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -23,7 +24,8 @@ class AuthService(
     private val jwtService: JwtService,
     private val userRepository: UserRepository,
     private val hashEncoder: HashEncoder,
-    private val refreshTokenRepository: RefreshTokenRepository
+    private val refreshTokenRepository: RefreshTokenRepository,
+    private val logClient: LogClient
 ) {
     fun register(email: String, password: String): ActionResponse {
         val user = userRepository.findByEmail(email.trim())
@@ -43,12 +45,15 @@ class AuthService(
     }
 
     fun login(email: String, password: String) : TokenPair?{
+        logClient.sendLog("tasky-auth", "Login Hit")
         val user = userRepository.findByEmail(email)
             ?: throw AuthException("This user does not exist. Kindly register")
 
         if(!hashEncoder.matches(password, user.hashedPassword)) {
+            logClient.sendLog("tasky-auth", "Login failed for $email ❌")
             throw AuthException("Invalid Credentials, Kindly use valid Credentials!")
         }
+        logClient.sendLog("tasky-auth", "User $email logged in ✅")
 
         return generateTokenPair(userId = user.id.toHexString())
     }
