@@ -1,7 +1,7 @@
 package com.khcodings.tasky.controllers
 
 import com.khcodings.tasky.infrastructure.security.CustomAuthEntryPoint
-import com.khcodings.tasky.application.auth.AuthService
+import com.khcodings.tasky.service.auth.AuthService
 import com.khcodings.tasky.infrastructure.security.JwtAuthFilter
 import com.khcodings.tasky.infrastructure.security.JwtService
 import io.mockk.mockk

@@ -1,9 +1,9 @@
 package com.khcodings.tasky.web.auth
 
-import com.khcodings.tasky.application.auth.AuthService
-import com.khcodings.tasky.application.auth.dto.AuthRequest
-import com.khcodings.tasky.application.auth.dto.RefreshRequest
-import com.khcodings.tasky.application.auth.dto.TokenPair
+import com.khcodings.tasky.service.auth.AuthService
+import com.khcodings.tasky.service.auth.dto.AuthRequest
+import com.khcodings.tasky.service.auth.dto.RefreshRequest
+import com.khcodings.tasky.service.auth.dto.TokenPair
 import com.khcodings.tasky.shared.response.ActionResponse
 import com.khcodings.tasky.shared.response.ApiResponse
 import com.khcodings.tasky.shared.interfaces.ValidationGroups

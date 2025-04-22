@@ -1,4 +1,4 @@
-package com.khcodings.tasky.application.tasks.dto
+package com.khcodings.tasky.service.tasks.dto
 
 import com.khcodings.tasky.domain.task.Task
 

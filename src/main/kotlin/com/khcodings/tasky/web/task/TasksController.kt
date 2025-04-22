@@ -1,8 +1,8 @@
 package com.khcodings.tasky.web.task
 
-import com.khcodings.tasky.application.tasks.TaskService
-import com.khcodings.tasky.application.tasks.dto.TaskRequest
-import com.khcodings.tasky.application.tasks.dto.TaskResponse
+import com.khcodings.tasky.service.tasks.TaskService
+import com.khcodings.tasky.service.tasks.dto.TaskRequest
+import com.khcodings.tasky.service.tasks.dto.TaskResponse
 import com.khcodings.tasky.shared.response.ActionResponse
 import com.khcodings.tasky.shared.response.ApiResponse
 import com.khcodings.tasky.shared.response.SuccessResponse

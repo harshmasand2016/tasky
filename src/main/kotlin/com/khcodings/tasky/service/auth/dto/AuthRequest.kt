@@ -1,4 +1,4 @@
-package com.khcodings.tasky.application.auth.dto
+package com.khcodings.tasky.service.auth.dto
 
 import com.khcodings.tasky.shared.interfaces.ValidationGroups
 import jakarta.validation.constraints.Email

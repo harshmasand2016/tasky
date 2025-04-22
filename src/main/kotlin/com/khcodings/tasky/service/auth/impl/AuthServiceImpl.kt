@@ -1,15 +1,16 @@
-package com.khcodings.tasky.application.auth
+package com.khcodings.tasky.service.auth.impl
 
-import com.khcodings.tasky.web.advice.exceptions.AuthException
-import com.khcodings.tasky.application.auth.dto.TokenPair
-import com.khcodings.tasky.shared.response.ActionResponse
-import com.khcodings.tasky.infrastructure.persistence.refresh.RefreshToken
 import com.khcodings.tasky.domain.user.User
-import com.khcodings.tasky.infrastructure.persistence.refresh.RefreshTokenRepository
 import com.khcodings.tasky.domain.user.UserRepository
+import com.khcodings.tasky.infrastructure.persistence.refresh.RefreshToken
+import com.khcodings.tasky.infrastructure.persistence.refresh.RefreshTokenRepository
 import com.khcodings.tasky.infrastructure.security.HashEncoder
 import com.khcodings.tasky.infrastructure.security.JwtService
+import com.khcodings.tasky.service.auth.AuthService
+import com.khcodings.tasky.service.auth.dto.TokenPair
+import com.khcodings.tasky.shared.response.ActionResponse
 import com.khcodings.tasky.utils.LogClient
+import com.khcodings.tasky.web.advice.exceptions.AuthException
 import org.bson.types.ObjectId
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -20,14 +21,16 @@ import java.time.Instant
 import java.util.*
 
 @Service
-class AuthService(
+class AuthServiceImpl(
     private val jwtService: JwtService,
     private val userRepository: UserRepository,
     private val hashEncoder: HashEncoder,
     private val refreshTokenRepository: RefreshTokenRepository,
     private val logClient: LogClient
-) {
-    fun register(email: String, password: String): ActionResponse {
+) : AuthService{
+
+
+    override fun register(email: String, password: String): ActionResponse {
         val user = userRepository.findByEmail(email.trim())
         if(user != null) {
             throw ResponseStatusException(HttpStatus.CONFLICT, "A user with that email already exists.")
@@ -44,7 +47,7 @@ class AuthService(
         )
     }
 
-    fun login(email: String, password: String) : TokenPair?{
+    override fun login(email: String, password: String) : TokenPair?{
         logClient.sendLog("tasky-auth", "Login Hit")
         val user = userRepository.findByEmail(email)
             ?: throw AuthException("This user does not exist. Kindly register")
@@ -83,7 +86,7 @@ class AuthService(
      * and preventing security risks caused by partial database updates or token misuse.
      */
     @Transactional
-    fun refresh(refreshToken: String) : TokenPair {
+    override fun refresh(refreshToken: String) : TokenPair {
         if(!jwtService.validateRefreshToken(refreshToken)){
             println("⛔ Invalid or expired token: $refreshToken")
 
