@@ -44,6 +44,11 @@ dependencies {
 	testImplementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
 
+	//Actuator
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+
+
 }
 
 kotlin {

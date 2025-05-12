@@ -54,7 +54,8 @@ class JwtAuthFilter(
         println("DEBUG: request.requestURI = $uri") // Optional: log to verify the URI in tests
         return uri.startsWith("/auth/") ||
                 uri.startsWith("/v3/api-docs") ||
-                uri.startsWith("/swagger-ui")
+                uri.startsWith("/swagger-ui") ||
+                uri.startsWith("/actuator/")
     }
 
     private fun sendUnauthorizedResponse(
